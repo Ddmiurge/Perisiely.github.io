@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="二分图,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u];">
+<meta name="description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u">
+<meta name="keywords" content="二分图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分图匹配">
 <meta property="og:url" content="http://yoursite.com/2019/07/08/二分图/index.html">
 <meta property="og:site_name" content="Elysia">
-<meta property="og:description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u];">
+<meta property="og:description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-08T03:56:27.814Z">
+<meta property="og:updated_time" content="2019-07-08T08:21:24.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二分图匹配">
-<meta name="twitter:description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u];">
+<meta name="twitter:description" content="二分图的匹配二分图的最大匹配增广路一条匹配边与非匹配边交替出现的路径叫做增广路 匹配边：两个点已经处于已选集合里面的边 非匹配边：这条边有个点不属于已经选过的集合里面的边 匈牙利算法在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止 1234567891011121314151617181920bool dfs(int u)&amp;#123;    for(int i=head[u">
 
 
 
@@ -292,6 +293,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图论/" itemprop="url" rel="index">
+                    <span itemprop="name">图论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -319,7 +342,9 @@
       
 
       
-        <h1 id="二分图的匹配"><a href="#二分图的匹配" class="headerlink" title="二分图的匹配"></a>二分图的匹配</h1><h2 id="二分图的最大匹配"><a href="#二分图的最大匹配" class="headerlink" title="二分图的最大匹配"></a><font color="DarkMagenta"><strong>二分图的最大匹配</strong></font></h2><h3 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a><font color="1453ad"><strong>增广路</strong></font></h3><p>一条匹配边与非匹配边交替出现的路径叫做增广路</p>
+        <a id="more"></a>
+
+<h1 id="二分图的匹配"><a href="#二分图的匹配" class="headerlink" title="二分图的匹配"></a>二分图的匹配</h1><h2 id="二分图的最大匹配"><a href="#二分图的最大匹配" class="headerlink" title="二分图的最大匹配"></a><font color="DarkMagenta"><strong>二分图的最大匹配</strong></font></h2><h3 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a><font color="1453ad"><strong>增广路</strong></font></h3><p>一条匹配边与非匹配边交替出现的路径叫做增广路</p>
 <p>匹配边：两个点已经处于已选集合里面的边</p>
 <p>非匹配边：这条边有个点不属于已经选过的集合里面的边</p>
 <h3 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a><font color="#1453ad"><strong>匈牙利算法</strong></font></h3><p>在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止</p>
@@ -339,6 +364,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二分图/" rel="tag"># 二分图</a>
+          
+        </div>
       
 
       
@@ -434,7 +465,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +487,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
