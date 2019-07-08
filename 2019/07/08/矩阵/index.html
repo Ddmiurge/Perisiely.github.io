@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="二分图,">
+  <meta name="keywords" content="搬运自旧博客,矩阵,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="关于二分图的匹配的一点基本的知识和模板">
-<meta name="keywords" content="二分图">
+<meta name="description" content="矩阵的概念和基础知识">
+<meta name="keywords" content="搬运自旧博客,矩阵">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二分图匹配">
-<meta property="og:url" content="http://yoursite.com/2019/07/08/二分图/index.html">
+<meta property="og:title" content="矩阵">
+<meta property="og:url" content="http://yoursite.com/2019/07/08/矩阵/index.html">
 <meta property="og:site_name" content="Elysia&#39;s Blog">
-<meta property="og:description" content="关于二分图的匹配的一点基本的知识和模板">
+<meta property="og:description" content="矩阵的概念和基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-08T08:51:41.006Z">
+<meta property="og:updated_time" content="2019-07-08T11:11:16.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二分图匹配">
-<meta name="twitter:description" content="关于二分图的匹配的一点基本的知识和模板">
+<meta name="twitter:title" content="矩阵">
+<meta name="twitter:description" content="矩阵的概念和基础知识">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/08/二分图/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/08/矩阵/">
 
 
 
 
 
-  <title>二分图匹配 | Elysia's Blog</title>
+  <title>矩阵 | Elysia's Blog</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/二分图/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/矩阵/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Elysia">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">二分图匹配</h1>
+          <h1 class="post-title" itemprop="name headline">矩阵</h1>
         
 
         <div class="post-meta">
@@ -282,7 +282,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T11:00:13+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T19:03:43+08:00">
                 2019-07-08
               </time>
             
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/图论/" itemprop="url" rel="index">
-                    <span itemprop="name">图论</span>
+                  <a href="/categories/数论/" itemprop="url" rel="index">
+                    <span itemprop="name">数论</span>
                   </a>
                 </span>
 
@@ -329,7 +329,7 @@
 
           
               <div class="post-description">
-                  关于二分图的匹配的一点基本的知识和模板
+                  矩阵的概念和基础知识
               </div>
           
 
@@ -348,12 +348,20 @@
       
         <a id="more"></a>
 
-<h1 id="二分图的匹配"><a href="#二分图的匹配" class="headerlink" title="二分图的匹配"></a>二分图的匹配</h1><h2 id="二分图的最大匹配"><a href="#二分图的最大匹配" class="headerlink" title="二分图的最大匹配"></a><font color="DarkMagenta"><strong>二分图的最大匹配</strong></font></h2><h3 id="增广路"><a href="#增广路" class="headerlink" title="增广路"></a><font color="1453ad"><strong>增广路</strong></font></h3><p>一条匹配边与非匹配边交替出现的路径叫做增广路</p>
-<p>匹配边：两个点已经处于已选集合里面的边</p>
-<p>非匹配边：这条边有个点不属于已经选过的集合里面的边</p>
-<h3 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a><font color="#1453ad"><strong>匈牙利算法</strong></font></h3><p>在二分图里面交替找增广路的算法，然后把增广路取反直到不存在增广路为止</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=to[i];</span><br><span class="line">        <span class="keyword">if</span>(!vis[v])&#123;</span><br><span class="line">			vis[v]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(!match[v]||dfs(match[v]))&#123;</span><br><span class="line">                 <span class="comment">//这里对应着两种情况，一种是还没有匹配，另一种是可以腾出空间</span></span><br><span class="line">				match[v]=u;</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">             &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)</span><br><span class="line">        <span class="comment">//这个N是左边的端点</span></span><br><span class="line">        <span class="keyword">if</span>(dfs[i])ans++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h1 id="用矩阵来祭我的第一篇博客"><a href="#用矩阵来祭我的第一篇博客" class="headerlink" title="用矩阵来祭我的第一篇博客"></a>用矩阵来祭我的第一篇博客</h1><p>感谢朱枫苓，WYX大佬为本人博客的建设做出的巨大贡献<br>再次特别发出大佬博客的地址，表示我对与朱枫苓大佬的敬佩<br><a href="http://buringstraw.win" target="_blank" rel="noopener">大佬自己的博客</a><br><a href="https://cnblogs.com/buringstraw/" target="_blank" rel="noopener">大佬在博客园的博客</a></p>
+<p>好了，来看看矩阵</p>
+<ol>
+<li>加法。只有同型的矩阵才可以相加，对应的位置上面相加就可以了。</li>
+<li>数乘。把一个矩阵拿来和一个常数相乘，每一位都乘上来就行了，没有什么多的了。</li>
+<li>倒置。直接行列倒过来就行了。还有一个定理：A*B的倒置等于A的倒置乘以B的倒置</li>
+</ol>
+<p>然后就到了重点了</p>
+<h2 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a><font color="darkMagenta"><strong>乘法</strong></font></h2><p>矩阵乘法<figure class="highlight plain"><figcaption><span>可以做乘法的条件是A的列数要等于B的行数 然后呢乘法就是A的第几行和B的第几列对应相乘累加就是答案第几几的位置的值了。这个矩阵啊，作用非常的大，配合快速幂，可以加速状态转移，实现很多的骚操作。 下面让我们看看矩阵是如何骚操作斐波那契数列的</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**题目背景**</span><br><span class="line"></span><br><span class="line">大家都知道，斐波那契数列是满足如下性质的一个数列：</span><br><span class="line"></span><br><span class="line">•``` f(1) = 1</span><br></pre></td></tr></table></figure></p>
+<p>• <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">•```f(n) = f(n-1) + f(n-2) (n ≥ 2 且 n 为整数)</span><br></pre></td></tr></table></figure></p>
+<p><strong>题目描述</strong></p>
+<p>请你求出 f(n) mod 1000000007 的值。</p>
+<p>设一个有两个元素的<figure class="highlight plain"><figcaption><span>```A[n]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">代码如下：</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">//Matrix F[n]=&#123;f[n],f[n-1]&#125;</span><br><span class="line">//A=&#123;1,1</span><br><span class="line">//   1,0&#125;</span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define ll long long</span><br><span class="line">using namespace std;</span><br><span class="line">ll A[2][2];</span><br><span class="line">const ll Mod=1000000007;</span><br><span class="line">void mul(ll *a,ll b[2][2])&#123;</span><br><span class="line">    ll tmp[2];</span><br><span class="line">    memset(tmp,0,sizeof(tmp));</span><br><span class="line">    for(int j=0;j&lt;=1;j++)&#123;</span><br><span class="line">        for(int k=0;k&lt;=1;k++)&#123;</span><br><span class="line">            (tmp[j]+=(a[k]*b[k][j]))%=Mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    memcpy(a,tmp,sizeof(tmp));</span><br><span class="line">&#125;</span><br><span class="line">void mulsel(ll (*f)[2])&#123;</span><br><span class="line">    ll tmp[2][2];</span><br><span class="line">    memset(tmp,0,sizeof(tmp));</span><br><span class="line">    for(int i=0;i&lt;=1;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;=1;j++)&#123;</span><br><span class="line">            for(int k=0;k&lt;=1;k++)&#123;</span><br><span class="line">                (tmp[i][j]+=(f[i][k]*f[k][j]))%=Mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    memcpy(f,tmp,sizeof(tmp));</span><br><span class="line">&#125;</span><br><span class="line">ll pw(ll b)&#123;</span><br><span class="line">    ll ans[2]=&#123;1,0&#125;;</span><br><span class="line">    while(b)&#123;</span><br><span class="line">        if(b&amp;1)mul(ans,A);</span><br><span class="line">        mulsel(A);</span><br><span class="line">        b&gt;&gt;=1;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans[1];</span><br><span class="line">&#125; </span><br><span class="line">int main()&#123;</span><br><span class="line">    #ifndef ONLINE_JUDGE</span><br><span class="line">    freopen(&quot;input.txt&quot;,&quot;r&quot;,stdin);</span><br><span class="line">    freopen(&quot;output.txt&quot;,&quot;w&quot;,stdout);</span><br><span class="line">    #endif</span><br><span class="line">    A[0][0]=1;A[0][1]=1;</span><br><span class="line">    A[1][0]=1;A[1][1]=0; </span><br><span class="line">    ll k;</span><br><span class="line">    cin&gt;&gt;k;</span><br><span class="line">    printf(&quot;%lld&quot;,pw(k));//快速幂 </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -371,7 +379,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/二分图/" rel="tag"># 二分图</a>
+            <a href="/tags/搬运自旧博客/" rel="tag"># 搬运自旧博客</a>
+          
+            <a href="/tags/矩阵/" rel="tag"># 矩阵</a>
           
         </div>
       
@@ -384,8 +394,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/08/2-SAT问题/" rel="next" title="2-SAT问题">
-                <i class="fa fa-chevron-left"></i> 2-SAT问题
+              <a href="/2019/07/08/二分图/" rel="next" title="二分图匹配">
+                <i class="fa fa-chevron-left"></i> 二分图匹配
               </a>
             
           </div>
@@ -394,8 +404,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/08/矩阵/" rel="prev" title="矩阵">
-                矩阵 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/08/洛谷P3807卢卡斯定理/" rel="prev" title="洛谷P3807卢卡斯定理">
+                洛谷P3807卢卡斯定理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -562,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二分图的匹配"><span class="nav-number">1.</span> <span class="nav-text">二分图的匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分图的最大匹配"><span class="nav-number">1.1.</span> <span class="nav-text">二分图的最大匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增广路"><span class="nav-number">1.1.1.</span> <span class="nav-text">增广路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匈牙利算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">匈牙利算法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用矩阵来祭我的第一篇博客"><span class="nav-number">1.</span> <span class="nav-text">用矩阵来祭我的第一篇博客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#乘法"><span class="nav-number">1.1.</span> <span class="nav-text">乘法</span></a></li></ol></li></ol></div>
             
 
           </div>
