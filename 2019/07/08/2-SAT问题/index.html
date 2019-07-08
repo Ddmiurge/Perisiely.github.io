@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="2-SAT问题描述有n个组，第i个组里有两个节点$A_i, A_i’$ 。需要从每个组中选出一个。而某些点不可以同时选出（称之为不相容）。任务是保证选出的n个点都能两两相容。这类型的问题我们称之为2-SAT问题 问题引入Question 某国有N个党派，每个党派里面有且只有两个代表（编号连续），要求从中选一个代表出来组成和平委员会，且如果两个代表不和，则他们不能同时属于委员会  Sample">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2-SAT问题">
+<meta property="og:url" content="http://yoursite.com/2019/07/08/2-SAT问题/index.html">
+<meta property="og:site_name" content="Elysia">
+<meta property="og:description" content="2-SAT问题描述有n个组，第i个组里有两个节点$A_i, A_i’$ 。需要从每个组中选出一个。而某些点不可以同时选出（称之为不相容）。任务是保证选出的n个点都能两两相容。这类型的问题我们称之为2-SAT问题 问题引入Question 某国有N个党派，每个党派里面有且只有两个代表（编号连续），要求从中选一个代表出来组成和平委员会，且如果两个代表不和，则他们不能同时属于委员会  Sample">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-08T03:21:57.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2-SAT问题">
+<meta name="twitter:description" content="2-SAT问题描述有n个组，第i个组里有两个节点$A_i, A_i’$ 。需要从每个组中选出一个。而某些点不可以同时选出（称之为不相容）。任务是保证选出的n个点都能两两相容。这类型的问题我们称之为2-SAT问题 问题引入Question 某国有N个党派，每个党派里面有且只有两个代表（编号连续），要求从中选一个代表出来组成和平委员会，且如果两个代表不和，则他们不能同时属于委员会  Sample">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/08/2-SAT问题/">
+
+
+
+
+
+  <title>2-SAT问题 | Elysia</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elysia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/2-SAT问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elysia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2-SAT问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-08T11:00:13+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+
+<h1 id="2-SAT问题"><a href="#2-SAT问题" class="headerlink" title="2-SAT问题"></a>2-SAT问题</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a><font color="darkmagenta"><strong>描述</strong></font></h2><p><strong>有n个组，第i个组里有两个节点$A_i, A_i’$ 。需要从每个组中选出一个。而某些点不可以同时选出（称之为不相容）。任务是保证选出的n个点都能两两相容。这类型的问题我们称之为2-SAT问题</strong></p>
+<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a><font color="darkmagenta"><strong>问题引入</strong></font></h2><h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a><font color="#1453ad"><em>Question</em></font></h3><blockquote>
+<p>某国有N个党派，每个党派里面有且只有两个代表（编号连续），要求从中选一个代表出来组成和平委员会，且如果两个代表不和，则他们不能同时属于委员会</p>
+</blockquote>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a><font color="#1453ad"><em>Sample Input</em></font></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">1 3</span><br><span class="line">2 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a><font color="#1453ad"><em>Sample Output</em></font></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 </span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a><font color="#1453ad"><em>Analysis</em></font></h3><h4 id="理解"><a href="#理解" class="headerlink" title="理解"></a><font color="c62b26"><em>理解</em></font></h4><p>可以通过图论知识来解决，如果选$1$,则不能选$4$,只能选$3$,而如果选4，则只能选2，所以我们根据这个来建立有向边。</p>
+<p>$Conclusion$:若所有$i_1,i_2$都不在同一个强分支，则有解。</p>
+<p>对于判定强分支有以下的方法</p>
+<ul>
+<li>$Kusarajo$,$Tarjan$</li>
+<li>染色法</li>
+</ul>
+<p>这里选择使用染色法</p>
+<h4 id="染色法"><a href="#染色法" class="headerlink" title="染色法"></a><font color="c62b26"><em>染色法</em></font></h4><p>从每一个组别开始去$dfs$,将要选择的点依次标记出来，并把其相关的必选点也同样染色，如果出现了冲突，则清除染色方案，重新染色。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//color是标记颜色的，other记录同一组中另外一个元素是多少</span></span><br><span class="line"><span class="comment">//stk是手动的栈，这里采用链式前向星存图</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(color[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	color[u]=<span class="literal">true</span>;</span><br><span class="line">	stk[++top]=u;<span class="comment">//记录 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="literal">false</span>,<span class="keyword">sizeof</span>(color));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(color[<span class="number">2</span>&lt;&lt;i<span class="number">-1</span>]||color[<span class="number">2</span>*i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="comment">//已经染过了色 </span></span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i<span class="number">-1</span>))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)color[stk[top]]=<span class="literal">false</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里来说一下这一段代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里不可以写成</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> DFS(to[i]);</span><br></pre></td></tr></table></figure>
+
+<p>因为这一点染色是否成功要看与之相关的所有的点的染色是否成功，而如果有相关一个点失败了，那么就是失败了，要回去重新$dfs$</p>
+<p>###<font color="1453ad"><em>Codes</em></font></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 8005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 20005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> other[maxn*<span class="number">2</span>],ans[maxn],N,M,tot=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> head[maxn],to[maxm],nxt[maxm];</span><br><span class="line"><span class="keyword">bool</span> color[maxn];<span class="keyword">int</span> stk[maxn],top=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;<span class="keyword">int</span> sign=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(c==<span class="string">'-'</span>)sign=<span class="number">-1</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">'9'</span>&amp;&amp;c&gt;=<span class="string">'0'</span>)&#123;res=res*<span class="number">10</span>+c<span class="number">-48</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">return</span> res*sign;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>*K;i++)</span><br><span class="line">		other[i]=(i&amp;<span class="number">1</span>)?i+<span class="number">1</span>:i<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	to[++tot]=y;</span><br><span class="line">	nxt[tot]=head[x];</span><br><span class="line">	head[x]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	N=read();M=read();</span><br><span class="line">	init(N);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> a=read(),b=read();</span><br><span class="line">		addedge(a,other[b]);</span><br><span class="line">		addedge(b,other[a]);</span><br><span class="line">		<span class="comment">//a,b之间是相互冲突的，如果a选了的话，那么就</span></span><br><span class="line">		<span class="comment">//必须要选b所在组别的另外一个，如果是b选了同理 </span></span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">if</span>(twoSAT())&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>*N;i++)<span class="keyword">if</span>(color[i])<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"NIE"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(color[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	color[u]=<span class="literal">true</span>;</span><br><span class="line">	stk[++top]=u;<span class="comment">//记录 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="literal">false</span>,<span class="keyword">sizeof</span>(color));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(color[<span class="number">2</span>&lt;&lt;i<span class="number">-1</span>]||color[<span class="number">2</span>*i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="comment">//已经染过了色 </span></span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i<span class="number">-1</span>))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)color[stk[top]]=<span class="literal">false</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>##<font color="darkMagenta"><strong>例题</strong></font></p>
+<p>###<font color="1453ad"><em>洛谷P4782</em></font></p>
+<p>链接：<a href="https://www.luogu.org/problemnew/show/P4782" target="_blank" rel="noopener">洛谷P4782</a></p>
+<h4 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="Analysis"></a><font color="c62b26"><em>Analysis</em></font></h4><p>就和它自己说的一样，这是一道模板题，这里选择把真和假的两种状态作为所说的选择。所以就选择用$i$表示这一个点要选，$i+N$来表示这一个点不选</p>
+<h4 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a><font color="c62b26"><em>Codes</em></font></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1000005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> color[maxn&lt;&lt;<span class="number">1</span>],N,M,other[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> stk[maxn&lt;&lt;<span class="number">1</span>],top=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> head[maxn&lt;&lt;<span class="number">1</span>],to[maxn&lt;&lt;<span class="number">1</span>],nxt[maxn&lt;&lt;<span class="number">1</span>],tot=<span class="number">0</span>;</span><br><span class="line"><span class="comment">//i表示 这一个节点真,i+N表示假 </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>,sign=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(c==<span class="string">'-'</span>)sign=<span class="number">-1</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">'9'</span>&amp;&amp;c&gt;=<span class="string">'0'</span>)&#123;res=res*<span class="number">10</span>+c<span class="number">-48</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">return</span> res*sign;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>*K;i++)</span><br><span class="line">		other[i]=(i&lt;=K)?(i+K):(i-K);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	to[++tot]=y;nxt[tot]=head[x];head[x]=tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	N=read();M=read();</span><br><span class="line">	init(N);</span><br><span class="line">	<span class="keyword">int</span> a,b,c,d;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;i++)&#123;</span><br><span class="line">		a=read();b=read();</span><br><span class="line">		c=read();d=read();</span><br><span class="line">		add(a+!b*N,c+d*N);</span><br><span class="line">		add(c+!d*N,a+b*N);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(twoSAT())&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"POSSIBLE\n"</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>,color[i]&lt;color[i+N]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"IMPOSSIBLE"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(color[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	color[u]=<span class="literal">true</span>;</span><br><span class="line">	stk[++top]=u;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="number">0</span>,<span class="keyword">sizeof</span>(color));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(color[i]||color[i+N])<span class="keyword">continue</span>;</span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!DFS(i))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)color[stk[top]]=<span class="literal">false</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!DFS(i+N))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="洛谷P4171"><a href="#洛谷P4171" class="headerlink" title="洛谷P4171"></a><font color="1453ad"><em>洛谷P4171</em></font></h3><p>链接：<a href="https://www.luogu.org/problemnew/show/P4171" target="_blank" rel="noopener">洛谷P4171</a></p>
+<p>####<font color="c62b26"><em>Analysis</em></font></p>
+<p>这题里面一种材料要么就只能做满洲菜，要么就做汉族菜，因此每一种材料，汉族菜和满洲菜就相当于是对应着$true$和$false$两种状态了，因此就这样来染色法解决问题。这一道题最需要注意的是在于输入时，每一道菜的序号不一定只有一位数。</p>
+<h4 id="Codes-1"><a href="#Codes-1" class="headerlink" title="Codes"></a><font color="c62b26"><em>Codes</em></font></h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 105</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxm 1005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> head[maxn&lt;&lt;<span class="number">1</span>],to[maxm&lt;&lt;<span class="number">1</span>],nxt[maxm&lt;&lt;<span class="number">1</span>],tot=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> stk[maxn&lt;&lt;<span class="number">1</span>],top=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> col[maxn&lt;&lt;<span class="number">1</span>],other[maxn&lt;&lt;<span class="number">1</span>],N,M,K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>,sign=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(c==<span class="string">'-'</span>)sign=<span class="number">-1</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(c&lt;=<span class="string">'9'</span>&amp;&amp;c&gt;=<span class="string">'0'</span>)&#123;res=res*<span class="number">10</span>+c<span class="number">-48</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">return</span> res*sign;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> K)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=K;i++)</span><br><span class="line">		other[i]=i+N,other[i+N]=i;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	to[++tot]=y;nxt[tot]=head[x];head[x]=tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	K=read();</span><br><span class="line">	<span class="keyword">while</span>(K--)&#123;</span><br><span class="line">		N=read();M=read();</span><br><span class="line">		init(N);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;i++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x=<span class="number">0</span>,y=<span class="number">0</span>,rep=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">char</span> kd[<span class="number">5</span>];</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;kd;</span><br><span class="line">			<span class="keyword">while</span>(kd[rep]&gt;=<span class="string">'0'</span>&amp;&amp;kd[rep]&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">				x=x*<span class="number">10</span>+kd[rep]<span class="number">-48</span>;</span><br><span class="line">				rep++;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">if</span>(kd[<span class="number">0</span>]==<span class="string">'m'</span>)x+=N;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;kd;</span><br><span class="line">			rep=<span class="number">1</span>;</span><br><span class="line">		 	<span class="keyword">while</span>(kd[rep]&gt;=<span class="string">'0'</span>&amp;&amp;kd[rep]&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">				y=y*<span class="number">10</span>+kd[rep]<span class="number">-48</span>;</span><br><span class="line">				rep++;</span><br><span class="line">			&#125;  </span><br><span class="line">			<span class="keyword">if</span>(kd[<span class="number">0</span>]==<span class="string">'m'</span>)y+=N;<span class="comment">//注意这里的输入很重要</span></span><br><span class="line">			add(x,other[y]);</span><br><span class="line">			add(y,other[x]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(twoSAT())<span class="built_in">printf</span>(<span class="string">"GOOD\n"</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"BAD\n"</span>);</span><br><span class="line">		<span class="built_in">memset</span>(other,<span class="number">0</span>,<span class="keyword">sizeof</span>(other));</span><br><span class="line">		<span class="built_in">memset</span>(to,<span class="number">0</span>,<span class="keyword">sizeof</span>(to));</span><br><span class="line">		<span class="built_in">memset</span>(head,<span class="number">0</span>,<span class="keyword">sizeof</span>(head));</span><br><span class="line">		<span class="built_in">memset</span>(nxt,<span class="number">0</span>,<span class="keyword">sizeof</span>(nxt));</span><br><span class="line">		tot=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(col[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(col[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	col[u]=<span class="number">1</span>;</span><br><span class="line">	stk[++top]=u;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!dfs(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(col,<span class="number">0</span>,<span class="keyword">sizeof</span>(col));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(col[i]||col[i+N])<span class="keyword">continue</span>;</span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!dfs(i))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)col[stk[top]]=<span class="number">0</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!dfs(i+N))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/08/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/08/二分图/" rel="prev" title="二分图匹配">
+                二分图匹配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-SAT问题"><span class="nav-number">1.</span> <span class="nav-text">2-SAT问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#描述"><span class="nav-number">1.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题引入"><span class="nav-number">1.2.</span> <span class="nav-text">问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Question"><span class="nav-number">1.2.1.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Input"><span class="nav-number">1.2.2.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Output"><span class="nav-number">1.2.3.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Analysis"><span class="nav-number">1.2.4.</span> <span class="nav-text">Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#染色法"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">染色法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-1"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Codes"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">Codes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#洛谷P4171"><span class="nav-number">1.2.5.</span> <span class="nav-text">洛谷P4171</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Codes-1"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">Codes</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
