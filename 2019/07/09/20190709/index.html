@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="搬运自旧博客,Lucas,">
+  <meta name="keywords" content="树状数组,树,概率期望,">
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="Lucas的模板">
-<meta name="keywords" content="搬运自旧博客,Lucas">
+<meta name="description" content="20190709的test">
+<meta name="keywords" content="树状数组,树,概率期望">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷P3807卢卡斯定理">
-<meta property="og:url" content="http://yoursite.com/2019/07/08/洛谷P3807卢卡斯定理/index.html">
+<meta property="og:title" content="20190709 test">
+<meta property="og:url" content="http://yoursite.com/2019/07/09/20190709/index.html">
 <meta property="og:site_name" content="Elysia&#39;s Blog">
-<meta property="og:description" content="Lucas的模板">
+<meta property="og:description" content="20190709的test">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
-<meta property="og:updated_time" content="2019-07-09T00:52:30.808Z">
+<meta property="og:updated_time" content="2019-07-09T09:52:44.856Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷P3807卢卡斯定理">
-<meta name="twitter:description" content="Lucas的模板">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
+<meta name="twitter:title" content="20190709 test">
+<meta name="twitter:description" content="20190709的test">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/08/洛谷P3807卢卡斯定理/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/09/20190709/">
 
 
 
 
 
-  <title>洛谷P3807卢卡斯定理 | Elysia's Blog</title>
+  <title>20190709 test | Elysia's Blog</title>
   
 
 
@@ -255,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/08/洛谷P3807卢卡斯定理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/20190709/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Elysia">
@@ -272,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">洛谷P3807卢卡斯定理</h1>
+          <h1 class="post-title" itemprop="name headline">20190709 test</h1>
         
 
         <div class="post-meta">
@@ -284,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-08T19:07:39+08:00">
-                2019-07-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T17:14:58+08:00">
+                2019-07-09
               </time>
             
 
@@ -307,7 +305,18 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数论/" itemprop="url" rel="index">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/数论/" itemprop="url" rel="index">
                     <span itemprop="name">数论</span>
                   </a>
                 </span>
@@ -331,7 +340,7 @@
 
           
               <div class="post-description">
-                  Lucas的模板
+                  20190709的test
               </div>
           
 
@@ -348,14 +357,21 @@
       
 
       
-        <p>这是一道模板题</p>
-<h2 id="这里是题目-洛谷P3807"><a href="#这里是题目-洛谷P3807" class="headerlink" title="这里是题目 洛谷P3807"></a><strong>这里是题目 <a href="https://www.luogu.org/problemnew/show/P3807" target="_blank" rel="noopener">洛谷P3807</a></strong></h2><h2 id="卢卡斯定理及题目的阐释"><a href="#卢卡斯定理及题目的阐释" class="headerlink" title="卢卡斯定理及题目的阐释"></a><font color="darkMagenta"><strong>卢卡斯定理及题目的阐释</strong></font></h2><p>卢卡斯定理是用来解决一大很大的组合数来和一个质数求余的问题，它的定义如下<br>如果p为素数，设n=sp+q,m=tp+r<br>则：</p>
-<img src="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
+        <h2 id="T1"><a href="#T1" class="headerlink" title="T1"></a><font color="darkmagenta"><strong>T1</strong></font></h2><h3 id="Desctription"><a href="#Desctription" class="headerlink" title="Desctription"></a><font color="1453ad"><em>Desctription</em></font></h3><blockquote>
+<p>一队勇士正在向你进攻，每名勇士都有一个战斗值$a_i$。但是这队勇士却有一个致命弱点，如果存在$i$&lt;$j$&lt;$k$使得$a_i$&gt;$a_j$&gt;$a_k$，则会影响他们整体的战斗力。我们将这样的一组(i,j,k)称为这队勇士的一个弱点。请求出这队勇士的弱点数目。</p>
+</blockquote>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a><font color="1453ad"><em>Input</em></font></h3><blockquote>
+<p>输入文件：$weakness.in$</p>
+<p>输入的第一行是一个整数n，表示勇士的数目。</p>
+<p>接下来一行包括n个整数，表示每个勇士的战斗值$a_i$</p>
+</blockquote>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a><font color="1453ad"><em>Output</em></font></h3><blockquote>
+<p>输入文件：$weakness.out$</p>
+<p>输出为一行，包含一个整数。表示这队勇士的弱点数目。</p>
+</blockquote>
+<h3 id="Anlysis"><a href="#Anlysis" class="headerlink" title="Anlysis"></a><font color="1453ad"><em>Anlysis</em></font></h3><p>这一道题很明显的就是一个逆序对数的题目，求每一个数和前面的数可以组成多少逆序对数，和后面可以组成多少逆序对数，然后乘起来，用树状数组来进行计算就可以了。</p>
+<h3 id="Codes"><a href="#Codes" class="headerlink" title="Codes"></a><font color="1453ad"><em>Codes</em></font></h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x) </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1000000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N,a[maxn+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> dat[maxn+<span class="number">5</span>],dat2[maxn+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> par[maxn+<span class="number">5</span>],par2[maxn+<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> limnum=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span>  <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span></span>&#123;</span><br><span class="line">	x=<span class="number">0</span>;<span class="keyword">int</span> sign=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">	<span class="keyword">while</span>(c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span>(c==<span class="string">'-'</span>)sign=<span class="number">-1</span>;c=getchar();&#125;</span><br><span class="line">	<span class="keyword">while</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)&#123;x=x*<span class="number">10</span>+c<span class="number">-48</span>;c=getchar();&#125;</span><br><span class="line">	x*=sign;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">upd</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> d[])</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x&lt;=limnum)&#123;</span><br><span class="line">		d[x]++;</span><br><span class="line">		x+=lowbit(x);</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> d[])</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">		res+=d[x];</span><br><span class="line">		x-=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	freopen(<span class="string">"weakness.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"weakness.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	read(N);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		read(a[i]);</span><br><span class="line">		<span class="keyword">if</span>(a[i]&gt;limnum)limnum=a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		upd(a[i],dat);</span><br><span class="line">		par[i]=sum(limnum,dat)-sum(a[i],dat);</span><br><span class="line">		upd(a[N-i+<span class="number">1</span>],dat2);</span><br><span class="line">		par2[N-i+<span class="number">1</span>]=sum(a[N-i+<span class="number">1</span>]<span class="number">-1</span>,dat2);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		ans+=(par[i]*par2[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>那么来看看题。<br>首先看这个数据范围，就知道可以用<s>int的类型解决个屁，就是int害的我错了好多次</s>long long 的数据类型解决，这个数据看起来好像是只有 10的5次方,但是中间这么多的计算，突然的就给我溢出了<s>我靠着ZFN大佬的数据测试发现负数才发现的</s>。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;m)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(n==m)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(m&gt;n-m)m=n-m;<span class="comment">//约掉 </span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> s1=<span class="number">1</span>,s2=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">		s1=s1*(n-i)%p;</span><br><span class="line">		s2=s2*(i+<span class="number">1</span>)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s1*qkpow(s2,p<span class="number">-2</span>,p)%p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这一段是求组合的函数，拿出来单独讲一讲<br>因为这里面的参数传过来的时候都是已经和p求过余了的，而且p在题目中说了的，是一个质数所以说这里的n,m都是和p互质的。<br>因为公式里面要除掉<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">而根据费马小定理可以知道它的逆元是它的```p-2```方</span><br><span class="line"></span><br><span class="line">## &lt;font color=darkmagenta&gt;**Code**&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">那么综上，加上以个快速幂就可以解出这道题了</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">//洛谷P3807 Lucas 模板题 </span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define maxn 100005</span><br><span class="line">using namespace std;</span><br><span class="line">int n,m,p;</span><br><span class="line">long long qkpow(long long b,int p,int mod)&#123;</span><br><span class="line">	long long res=1;</span><br><span class="line">	while(p)&#123;</span><br><span class="line">		if(p&amp;1)&#123;</span><br><span class="line">			(res*=b)%=mod;</span><br><span class="line">		&#125;</span><br><span class="line">		(b*=b)%=mod;</span><br><span class="line">		p&gt;&gt;=1;</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line">long long C(int n,int m,int p)&#123;</span><br><span class="line">	if(n&lt;m)return 0;</span><br><span class="line">	if(n==m)return 1;</span><br><span class="line">	if(m&gt;n-m)m=n-m;//约掉 </span><br><span class="line">	long long s1=1,s2=1;</span><br><span class="line">	for(int i=0;i&lt;m;i++)&#123;</span><br><span class="line">		s1=s1*(n-i)%p;</span><br><span class="line">		s2=s2*(i+1)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	return s1*qkpow(s2,p-2,p)%p;</span><br><span class="line">&#125;</span><br><span class="line">long long Lucas(int n,int m,int p)&#123;</span><br><span class="line">	if(m==0)return 1;</span><br><span class="line">	return C(n%p,m%p,p)*Lucas(n/p,m/p,p)%p;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	#ifndef ONLINE_JUDGE</span><br><span class="line">	freopen(&quot;input.txt&quot;,&quot;r&quot;,stdin);</span><br><span class="line">	freopen(&quot;output.txt&quot;,&quot;w&quot;,stdout);</span><br><span class="line">	#endif</span><br><span class="line">	int t;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">	while(t--)&#123;</span><br><span class="line">		scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;p);</span><br><span class="line">		n+=m;</span><br><span class="line">		cout&lt;&lt;Lucas(n,m,p)&lt;&lt;&quot;\n&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -373,9 +389,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/搬运自旧博客/" rel="tag"># 搬运自旧博客</a>
+            <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
           
-            <a href="/tags/Lucas/" rel="tag"># Lucas</a>
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+            <a href="/tags/概率期望/" rel="tag"># 概率期望</a>
           
         </div>
       
@@ -388,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/08/矩阵/" rel="next" title="矩阵">
-                <i class="fa fa-chevron-left"></i> 矩阵
+              <a href="/2019/07/08/高精度压位/" rel="next" title="高精度压位">
+                <i class="fa fa-chevron-left"></i> 高精度压位
               </a>
             
           </div>
@@ -397,10 +415,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/08/康托展开/" rel="prev" title="康托展开">
-                康托展开 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -566,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这里是题目-洛谷P3807"><span class="nav-number">1.</span> <span class="nav-text">这里是题目 洛谷P3807</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卢卡斯定理及题目的阐释"><span class="nav-number">2.</span> <span class="nav-text">卢卡斯定理及题目的阐释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#T1"><span class="nav-number">1.</span> <span class="nav-text">T1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Desctription"><span class="nav-number">1.1.</span> <span class="nav-text">Desctription</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">1.2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">1.3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anlysis"><span class="nav-number">1.4.</span> <span class="nav-text">Anlysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Codes"><span class="nav-number">1.5.</span> <span class="nav-text">Codes</span></a></li></ol></li></ol></div>
             
 
           </div>
