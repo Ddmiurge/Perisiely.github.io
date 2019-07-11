@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="概率期望,搬运自旧博客,Catalan Number,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="很久以前一个数论的test">
+<meta name="keywords" content="概率期望,搬运自旧博客,Catalan Number">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数论test">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/数论test/index.html">
+<meta property="og:site_name" content="Elysia&#39;s Blog">
+<meta property="og:description" content="很久以前一个数论的test">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-11T06:39:13.062Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数论test">
+<meta name="twitter:description" content="很久以前一个数论的test">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/11/数论test/">
+
+
+
+
+
+  <title>数论test | Elysia's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elysia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">秋天不是从世界里，而是从我们的心中开始。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/数论test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elysia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elysia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数论test</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T14:26:54+08:00">
+                2019-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数论/" itemprop="url" rel="index">
+                    <span itemprop="name">数论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  很久以前一个数论的test
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="有趣的序列"><a href="#有趣的序列" class="headerlink" title="有趣的序列"></a><font color="darkblue">有趣的序列</font></h2><p><a href="https://www.luogu.org/problemnew/show/P3200" target="_blank" rel="noopener"><font size="5">洛谷链接</font></a><br>这一道题是一道卡特兰数的题，但是因为数据量以及要进行模运算的原因，要采用我先前博客中写到的通项式。当然因为不可以直接算阶乘，因此采取分解阶乘的方法转换成乘法。</p>
+<blockquote>
+<p><font color="green">Code</font></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1000002</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Int64 long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> primes[<span class="number">2</span>*maxn];</span><br><span class="line"><span class="keyword">int</span> sum[<span class="number">2</span>*maxn];</span><br><span class="line"><span class="keyword">bool</span> isp[<span class="number">2</span>*maxn];</span><br><span class="line"><span class="keyword">int</span> newp=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eular_Sieve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;<span class="number">2</span>*maxn;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!isp[i])&#123;</span><br><span class="line">			primes[++newp]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=newp&amp;&amp;primes[j]*i&lt;<span class="number">2</span>*maxn;j++)&#123;</span><br><span class="line">			isp[primes[j]*i]=<span class="literal">true</span>;</span><br><span class="line">			<span class="keyword">if</span>(!(i%primes[j]))<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Int64 <span class="title">qkpow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="comment">//a的b次方mod p </span></span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">1</span>)<span class="keyword">return</span> a;</span><br><span class="line">	<span class="keyword">if</span>(b%<span class="number">2</span>)&#123;</span><br><span class="line">		Int64 t=qkpow(a,b/<span class="number">2</span>,p);</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		t=t*a%p;</span><br><span class="line">		<span class="keyword">return</span> t;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		Int64 t=qkpow(a,b/<span class="number">2</span>,p);</span><br><span class="line">		t=t*t%p;</span><br><span class="line">		<span class="keyword">return</span> t;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n,p;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;p);</span><br><span class="line">	Eular_Sieve();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=newp;i++)&#123;</span><br><span class="line">		Int64 t=primes[i];</span><br><span class="line">		Int64 cnt1=<span class="number">0</span>,cnt2=<span class="number">0</span>,cnt3=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(t&lt;=<span class="number">2</span>*n)&#123;</span><br><span class="line">			cnt1+=(<span class="number">2</span>*n/t);cnt2+=((n+<span class="number">1</span>)/t);cnt3+=(n/t);</span><br><span class="line">			t*=primes[i];</span><br><span class="line">		&#125;</span><br><span class="line">		sum[i]=cnt1-cnt2-cnt3;</span><br><span class="line">	&#125;</span><br><span class="line">	Int64 ans=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=newp;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(sum[i])&#123;</span><br><span class="line">			(ans*=qkpow(primes[i],sum[i],p))%=p;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="打气球"><a href="#打气球" class="headerlink" title="打气球"></a><font color="blue">打气球</font></h2><p>这道题我就不给网址了，yzoj上面最后一页找</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><blockquote>
+<p><font color="#3091f2" size="4"><strong>Descrition</strong></font></p>
+</blockquote>
+<p>周末何老板到磁器口游玩。街边有小贩在组织一种打气球游戏，何老板很感兴趣。</p>
+<p>店家立了一块布，布上画了N*N的方格，有的方格里挂上了气球，有的没有。</p>
+<p>游戏规则如下：</p>
+<p>第1步.观察。如果每一行都至少有一个方格没有气球，并且每一列都至少有一个方格没有气球，游戏结束。否则进行第2步。</p>
+<p>第2步.抛骰子。店家拿出一个特制的骰子，该骰子有N个面，上面依次有1到N这N 个数字。玩家先后抛两次骰子，设第一次抛出的数字为x，设第二次抛出的数字为y (注：抛出的数字是随机的)。</p>
+<p>第3步.打气球。若坐标为(x,y)的格子里有气球，玩家必须将其打爆。子弹1块钱一发。</p>
+<p>如果该格子没有气球，忽略该格子，玩家不用开枪，但玩家也需要支付给店家1块钱。</p>
+<p>第4步.继续。执行第1步。 </p>
+<p>何老板是个神枪手，他能做到百发百中。他想你帮他算算，对于当前给出的这局游戏，预计要花多少钱才能结束。</p>
+<blockquote>
+<p><font color="#3091f2" size="4"><strong>Input</strong></font></p>
+</blockquote>
+<p>第一行，两个整数N和M，N表示方格的尺寸,M表示游戏开始时，有M个格子里是没有气球的。 接下来M行，每行两个整数x,y,表示坐标为x,y的格子里没有气球。</p>
+<blockquote>
+<p><font color="#3091f2" size="4"><strong>Output</strong></font></p>
+</blockquote>
+<p>一行，一个实数，完成游戏预计花费，保留2个小数位。</p>
+<blockquote>
+<p><font color="#3091f2" size="4"><strong>Sample Input</strong></font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5 2 </span><br><span class="line">2 3 </span><br><span class="line">4 1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><font color="#3091f2" size="4"><strong>Sample Output</strong></font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11.77</span><br></pre></td></tr></table></figure>
+
+<p>如果你想看更多的样例输出，可以去<a href="https://wuyanxi.top/2019/02/15/20190201-%E6%95%B0%E8%AE%BA%E9%98%B6%E6%AE%B5%E8%80%83%E8%AF%95%E9%A2%98%E7%9B%AE%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">WYX大佬的博客</a></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a><font color="DarkMagenta">分析</font></h3><p>这一道题啊，实际上啊，就是一道期望的题，如果你点开了上面的那一个链接，多半也看见了YB说的话了吧，那么接下来要做的事情就是找出递归的关系<br>首先，我们都知道每一个格子概率为<code>1/(n*n)</code><br>我们设有<code>r</code>行已经打掉，<code>c</code>列已经打掉，函数为<code>f[r][c]=......</code><br>那么分类讨论<br>1.如果说没有抽到有气球的地方，那么就是他自己乘上没有气球的地方的概率<br>2.如果说打掉的地方只能消除行，那么就是乘上<code>f[r-1][c]</code>以及这些地方的概率，只能消除列同理<br>3.如果可以同时消去的话，那么就可以类比上面的，写出式子来。<br>4.当然最后你应该加上1，因为每打一次收费1</p>
+<p>式子和化简如下<br>$$<br>f[r][c]=\\ \frac{f[r-1][c]\times r(n-c)+f[r][c-1]\times c(n-r)+f[r-1][c-1]\times r\times c+f[r][c]\times(n-r)(n-c)+n^2}{n^2(n-r)(n-c)}<br>$$<br>好了，既然已经知道了式子，那么就可以比较容易的做出来了，至于边界，那你也可以自己推出来，你可以选择两种方法，<figure class="highlight plain"><figcaption><span>or``` dp```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">我的代码里面把```dfs```的注释掉了</span><br><span class="line"></span><br><span class="line">&gt; &lt;font color =green &gt;Code&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define maxn 2003</span><br><span class="line">using namespace std;</span><br><span class="line">double f[maxn][maxn];</span><br><span class="line">bool row[maxn],col[maxn];//行 列 </span><br><span class="line">int n,m;</span><br><span class="line">double dfs(int r,int c)&#123;</span><br><span class="line">	double ans=0;</span><br><span class="line">	if(!r&amp;&amp;!c)return 0;</span><br><span class="line">	if(f[r][c]!=-1)return f[r][c];</span><br><span class="line">	if(r)ans+=dfs(r-1,c)*r*(n-c);</span><br><span class="line">	if(c)ans+=dfs(r,c-1)*c*(n-r);</span><br><span class="line">	if(r&amp;&amp;c)ans+=dfs(r-1,c-1)*r*c;</span><br><span class="line">	return f[r][c]=(double)(ans+n*n)/(n*(c+r)-c*r);</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	</span><br><span class="line">	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);</span><br><span class="line">	int r=n,c=n;</span><br><span class="line">	for(int i=1;i&lt;=m;i++)&#123;</span><br><span class="line">		int x,y;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line">		if(!row[x])r--,row[x]=true;</span><br><span class="line">		if(!col[y])c--,col[y]=true;</span><br><span class="line">	&#125;</span><br><span class="line">	/*for(int i=0;i&lt;=r;i++)&#123;</span><br><span class="line">		for(int j=0;j&lt;=c;j++)f[i][j]=-1;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(r,c);*/</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		f[i][0]=f[i-1][0]+n/(i+0.0);</span><br><span class="line">		f[0][i]=f[0][i-1]+n/(i+0.0);</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=r;i++)&#123;</span><br><span class="line">		for(int j=1;j&lt;=c;j++)&#123;</span><br><span class="line">			double tmp=f[i-1][j]*i*(n-j)+f[i][j-1]*(n-i)*j+f[i-1][j-1]*i*j+n*n;</span><br><span class="line">			f[i][j]=tmp/(n*(i+j)-i*j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%.2lf&quot;,f[r][c]);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还有一道题，不过比较水，居然用暴力枚举就可以做出来了，早知道我当时就直接枚举了，题目与韩信点兵类似</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/概率期望/" rel="tag"># 概率期望</a>
+          
+            <a href="/tags/搬运自旧博客/" rel="tag"># 搬运自旧博客</a>
+          
+            <a href="/tags/Catalan-Number/" rel="tag"># Catalan Number</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/11/博弈论入门/" rel="next" title="博弈论入门">
+                <i class="fa fa-chevron-left"></i> 博弈论入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/11/递推复习 (1)/" rel="prev" title="dp review (1)">
+                dp review (1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Elysia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://wuyanxi.top/" target="_blank" title="WYX大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>WYX大佬</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://buringstraw.win/" target="_blank" title="ZFN大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>ZFN大佬</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://sanapri.cn/" target="_blank" title="sanapri强者">
+                      
+                        <i class="fa fa-fw fa-globe"></i>sanapri强者</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://epworth.coding.me/" target="_blank" title="XJJ强者">
+                      
+                        <i class="fa fa-fw fa-globe"></i>XJJ强者</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.luogu.org/blog/108191/" target="_blank" title="LTX大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>LTX大佬</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#有趣的序列"><span class="nav-number">1.</span> <span class="nav-text">有趣的序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打气球"><span class="nav-number">2.</span> <span class="nav-text">打气球</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.2.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elysia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

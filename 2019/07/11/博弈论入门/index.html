@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="博弈论,SG函数,搬运自旧博客,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="关于博弈论的一点基础知识">
+<meta name="keywords" content="博弈论,SG函数,搬运自旧博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博弈论入门">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/博弈论入门/index.html">
+<meta property="og:site_name" content="Elysia&#39;s Blog">
+<meta property="og:description" content="关于博弈论的一点基础知识">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-11T06:38:45.078Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="博弈论入门">
+<meta name="twitter:description" content="关于博弈论的一点基础知识">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/11/博弈论入门/">
+
+
+
+
+
+  <title>博弈论入门 | Elysia's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Elysia's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">秋天不是从世界里，而是从我们的心中开始。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/11/博弈论入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Elysia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Elysia's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">博弈论入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-11T14:24:23+08:00">
+                2019-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数论/" itemprop="url" rel="index">
+                    <span itemprop="name">数论</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  关于博弈论的一点基础知识
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="博弈论（Game-Theory）"><a href="#博弈论（Game-Theory）" class="headerlink" title="博弈论（Game Theory）"></a><font color="blue">博弈论（Game Theory）</font></h1><p>首先先说两个定义<br>N状态:<font color="red">前面的一个玩家</font>必胜<br>P状态: <font color="red">后面一个玩家</font>必胜</p>
+<h2 id="巴什博弈-（Bush-Game）"><a href="#巴什博弈-（Bush-Game）" class="headerlink" title="巴什博弈 （Bush Game）"></a>巴什博弈 （Bush Game）</h2><p>有一堆数量为n的物体，轮流拿，至少拿1个，至多拿k个(N&gt;K);<br>如果<code>n%（k+1）==0</code>，那么先手必败。<br><s>这一切是显而易见，毫无疑问的</s></p>
+<blockquote>
+<p>一道例题<br>Tang and Jiang are good friends. To decide whose treat it is for dinner, they are playing a game. Specifically, Tang and Jiang will alternatively write numbers (integers) on a white board. Tang writes first, then Jiang, then again Tang, etc… Moreover, assuming that the number written in the previous round is X, the next person who plays should write a number Y such that 1 &lt;= Y - X &lt;= k. The person who writes a number no smaller than N first will lose the game. Note that in the first round, Tang can write a number only within range [1, k] (both inclusive). You can assume that Tang and Jiang will always be playing optimally, as they are both very smart students.</p>
+</blockquote>
+<p>这一道题目大意上和Bush Game 差不多，但是不同的是它里面说的是写不出不小于n的就输了，那么必胜的时候就是你已经写出了n-1的时候。所以此时如果<code>(n-1)%(k+1)==0</code>那么先手必定输，否则就是后手输，因为先手那一次后可已转换为第一种情况</p>
+<h2 id="尼姆博弈-（Nim-Game）"><a href="#尼姆博弈-（Nim-Game）" class="headerlink" title="尼姆博弈 （Nim Game）"></a>尼姆博弈 （Nim Game）</h2><p>有n堆物体，每一堆的数量为a[i]个，每一次一个人任选一堆取出任意个（不能为0）<br>设k为每一堆异或的结果，如果<code>k==0</code>，那么先手必定失败，否则先手必定胜利。<br>这样来想，把每一堆的数量转换成二进制然后竖着来最低位对齐。如果说<code>k==0</code>,那么这意味这每一个列的1的个数一定会是偶数个。而第一个人取走了一些以后呢，这意味着一定一些列的1的个数为变成奇数个，那么k一定就不再等于0了。而此时后手的人只要把异或的值修正为0就可以了。<br>因为<font color="red">k不等于0了，那么这就说明k的最高位一定会是1，而这个最高位的1一定会是a[i]中的对应位上的1提供的</font>。<br>而根据异或的性质，k和a[i]异或结果为其他的异或结果。<br>我们可以在a[i]中减去一些值，是a[i]最终等于k和a[i]异或的结果，<font color="red">又因为k最高位的1是由a[i]提供的，那么那里一定会变成0，就一定会比a[i]小，而只要把这里减掉，k就又会等于0了</font></p>
+<h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><h3 id="公平组合游戏"><a href="#公平组合游戏" class="headerlink" title="公平组合游戏"></a>公平组合游戏</h3><p>1.双方交替来进行；<br>2.游戏进行的任意时刻，可以执行的合法行动与哪一个玩家执行无关；<br>3.当玩家无法行动的时候，就判负</p>
+<h3 id="mex运算"><a href="#mex运算" class="headerlink" title="mex运算"></a>mex运算</h3><p>$$<br>mex(S)=min{x|x\in N,x\notin S}<br>$$</p>
+<h3 id="SG函数-1"><a href="#SG函数-1" class="headerlink" title="SG函数"></a>SG函数</h3><p>对于任意状态下的x<br>$$<br>SG(x)=mex{SG(y)|y是x的后继状态}<br>$$<br>对于终止状态，SG值为0。</p>
+<blockquote>
+<p>如果某一状态后继SG有0，则当前状态为N<br>如果当前状态所有后继SG不为0，则当前为P;</p>
+</blockquote>
+<p>好的，既然已经知道了SG函数是什么，那么就有一道题了。</p>
+<h4 id="移棋子游戏"><a href="#移棋子游戏" class="headerlink" title="移棋子游戏"></a>移棋子游戏</h4><blockquote>
+<p><font color="blue"><strong>Description</strong></font></p>
+</blockquote>
+<p>给定一个有N个节点的DAG图，图上某些节点上面有棋子。两名玩家交替移动棋子，玩家每一次可以将任意一颗棋子沿着有向边移动到下一个节点，当无法移动的时候，就输掉了游戏，假设双方都足够聪明，问先手必胜还是后手必胜。</p>
+<blockquote>
+<p><font color="blue"><strong>Input</strong></font></p>
+</blockquote>
+<p>第一行三个整数N,M,K,表示N个节点M条边K个棋子。接下来M行，每行两个整数x,y,代表x节点到y节点的有向边再接下来K行，表示K个棋子所在的节点编号。</p>
+<blockquote>
+<p><font color="blue"><strong>output</strong></font></p>
+</blockquote>
+<p>先手胜输出”win”,否则输出”lose”</p>
+<blockquote>
+<p><font color="blue"><strong>Sample Input</strong></font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">6 8 4</span><br><span class="line">2 1</span><br><span class="line">2 4</span><br><span class="line">1 4</span><br><span class="line">1 5</span><br><span class="line">4 5</span><br><span class="line">1 3</span><br><span class="line">3 5</span><br><span class="line">3 6</span><br><span class="line">1 2 4 6</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><font color="blue"><strong>Sample Output</strong></font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">win</span><br></pre></td></tr></table></figure>
+
+<p>这应该是我第一次这么抄题吧。<br>DAG图，看到这个应该回想起拓扑排序，其次，因为没有后继的点SG值为0，而每一个点的SG值又是有它的后继决定的。如果它的后继没有弄完，那么就不可以算。这很像拓扑排序把入度为0的点push进队列。<br>因此不难想到这一题可以用类似于拓扑排序的方法来做。我们需要存两个图，正向的和反向的。正向的图用来寻找这一个点的后继获取这一个点的SG值，反向的用来找祖宗，修改祖宗的出度，并把出度为0的祖宗push进入队列<br>因为有拓扑排序的基础，所以这一道题可以比较容易的做出来了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 2003</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt;Q;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;G[maxn];<span class="comment">//正着存图</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;G_[maxn];<span class="comment">//反着存图</span></span><br><span class="line"><span class="keyword">int</span> chess[maxn],SG[maxn];<span class="comment">//记录棋子的位置 ,SG函数值 </span></span><br><span class="line"><span class="keyword">bool</span> vis[maxn*<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,outdgr[maxn];<span class="comment">//记录点，边，出度 </span></span><br><span class="line"><span class="keyword">int</span> k; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!outdgr[i])&#123;</span><br><span class="line">			Q.push(i);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(!Q.empty())&#123;	</span><br><span class="line">		<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));	</span><br><span class="line">		<span class="keyword">int</span> u=Q.front();Q.pop();</span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iter=G[u].begin();</span><br><span class="line">		<span class="keyword">int</span> maxsg=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(iter!=G[u].end())&#123;</span><br><span class="line">			maxsg=max(maxsg,SG[*iter]);</span><br><span class="line">			vis[SG[*iter]]=<span class="literal">true</span>;</span><br><span class="line">			iter++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> j;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;=maxsg+<span class="number">1</span>;j++)<span class="keyword">if</span>(!vis[j])<span class="keyword">break</span>;</span><br><span class="line">		SG[u]=j;<span class="comment">//得到这一个点的SG值 </span></span><br><span class="line">		<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iter_=G_[u].begin();</span><br><span class="line">		<span class="keyword">while</span>(iter_!=G_[u].end())&#123;</span><br><span class="line">			outdgr[*iter_]--;</span><br><span class="line">			<span class="keyword">if</span>(!outdgr[*iter_])Q.push(*iter_);</span><br><span class="line">			iter_++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=SG[chess[<span class="number">1</span>]];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;i++)ans^=SG[chess[i]];</span><br><span class="line">	<span class="keyword">if</span>(!ans)<span class="built_in">printf</span>(<span class="string">"lose\n"</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"win\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(outdgr,<span class="number">0</span>,<span class="keyword">sizeof</span>(outdgr));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">		G[u].push_back(v);</span><br><span class="line">		G_[v].push_back(u); </span><br><span class="line">		outdgr[u]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;chess[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么，That’s all.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/博弈论/" rel="tag"># 博弈论</a>
+          
+            <a href="/tags/SG函数/" rel="tag"># SG函数</a>
+          
+            <a href="/tags/搬运自旧博客/" rel="tag"># 搬运自旧博客</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/11/洛谷P2421/" rel="next" title="洛谷P2421题解">
+                <i class="fa fa-chevron-left"></i> 洛谷P2421题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/11/数论test/" rel="prev" title="数论test">
+                数论test <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Elysia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://wuyanxi.top/" target="_blank" title="WYX大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>WYX大佬</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://buringstraw.win/" target="_blank" title="ZFN大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>ZFN大佬</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://sanapri.cn/" target="_blank" title="sanapri强者">
+                      
+                        <i class="fa fa-fw fa-globe"></i>sanapri强者</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://epworth.coding.me/" target="_blank" title="XJJ强者">
+                      
+                        <i class="fa fa-fw fa-globe"></i>XJJ强者</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.luogu.org/blog/108191/" target="_blank" title="LTX大佬">
+                      
+                        <i class="fa fa-fw fa-globe"></i>LTX大佬</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#博弈论（Game-Theory）"><span class="nav-number">1.</span> <span class="nav-text">博弈论（Game Theory）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#巴什博弈-（Bush-Game）"><span class="nav-number">1.1.</span> <span class="nav-text">巴什博弈 （Bush Game）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尼姆博弈-（Nim-Game）"><span class="nav-number">1.2.</span> <span class="nav-text">尼姆博弈 （Nim Game）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SG函数"><span class="nav-number">1.3.</span> <span class="nav-text">SG函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#公平组合游戏"><span class="nav-number">1.3.1.</span> <span class="nav-text">公平组合游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mex运算"><span class="nav-number">1.3.2.</span> <span class="nav-text">mex运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SG函数-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">SG函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#移棋子游戏"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">移棋子游戏</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Elysia</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
