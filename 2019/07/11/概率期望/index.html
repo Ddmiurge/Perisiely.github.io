@@ -45,6 +45,32 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -348,7 +374,7 @@
       
         <h1 id="概率与期望"><a href="#概率与期望" class="headerlink" title="概率与期望"></a><font color="blue">概率与期望</font></h1><h2 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h2><p>概率这一个词语在生活中实际上是经常会碰见的，所以说这里我就来说一说相对而言遇到的要少一些的期望。这个期望啊，可以理解为<font color="red"><strong>某些事件大量发生以后的平均的结果</strong></font>。这就好比一个六面的色子扔了很多很多次以后，色子平均值会趋近于<code>3.5</code>。<s>这个原因啊，是显而易见，毫无疑问的，就不需要再多解释了</s>。</p>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>好的，有一道例题可以看看<br><a href="https://www.luogu.org/problemnew/show/P4316" target="_blank" rel="noopener">洛谷P4316</a><br>这一道题啊，读完了我就想到了拓扑排序，，同时用两个变长数组来存就可以了<s>最开始我想用边集，可是我不知道怎么用边集来拓扑排序啊，于是ZhuFN大佬提醒我用两个变长数组</s>。因此，我们只需要用两个变长数组，一个<font color="red">用来存点</font>,一个用来<font color="red">存权值</font>就OK了。<br>而这一个拓扑排序的过程中，相对与普通的拓扑排序，增加上对于期望长度的累加就可以了这是因为期望具有可加性<br>$probab(u)$来的那一个点的期望长度，<code>w</code>为这一条边的权值，$outdgr(v)$为有几条路进来，那么可以得到<br>$$<br>probab(v)=[probab(u)+w]/outdgr(v)<br>$$<br>我们这里可采用正着来或反着来（应该是吧），就像是$USACO$的数字金字塔一样吧</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;			</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;G[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;W[maxn];</span><br><span class="line"><span class="keyword">int</span> n,tmp=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> indgr[maxn];</span><br><span class="line"><span class="keyword">int</span> outdgr[maxn];</span><br><span class="line"><span class="keyword">double</span> probab[maxn];</span><br><span class="line"><span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topsort</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Q.push(n);</span><br><span class="line">    <span class="keyword">while</span>(!(Q.empty()))&#123;</span><br><span class="line">        <span class="keyword">int</span> u=Q.front();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iterG=G[u].begin();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iterW=W[u].begin();</span><br><span class="line">        <span class="keyword">while</span>(iterG!=G[u].end())&#123;</span><br><span class="line">            <span class="keyword">int</span> v=*iterG,w=*iterW;</span><br><span class="line">            indgr[v]--;</span><br><span class="line">            probab[v]+=(probab[u]+w)/(outdgr[v]);</span><br><span class="line">            <span class="keyword">if</span>(!indgr[v])&#123;</span><br><span class="line">                Q.push(v);</span><br><span class="line">            &#125;</span><br><span class="line">            iterW++;iterG++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(indgr,<span class="number">0</span>,<span class="keyword">sizeof</span>(indgr));</span><br><span class="line">    <span class="built_in">memset</span>(outdgr,<span class="number">0</span>,<span class="keyword">sizeof</span>(outdgr));</span><br><span class="line">    <span class="built_in">memset</span>(probab,<span class="number">0</span>,<span class="keyword">sizeof</span>(probab));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">int</span> a,b,c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">        indgr[a]++;outdgr[a]++;</span><br><span class="line">        G[b].push_back(a);</span><br><span class="line">        W[b].push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    topsort();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2lf"</span>,probab[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;			</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;G[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;W[maxn];</span><br><span class="line"><span class="keyword">int</span> n,tmp=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> indgr[maxn];</span><br><span class="line"><span class="keyword">int</span> outdgr[maxn];</span><br><span class="line"><span class="keyword">double</span> probab[maxn];</span><br><span class="line"><span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topsort</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Q.push(n);</span><br><span class="line">    <span class="keyword">while</span>(!(Q.empty()))&#123;</span><br><span class="line">        <span class="keyword">int</span> u=Q.front();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iterG=G[u].begin();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator iterW=W[u].begin();</span><br><span class="line">        <span class="keyword">while</span>(iterG!=G[u].end())&#123;</span><br><span class="line">            <span class="keyword">int</span> v=*iterG,w=*iterW;</span><br><span class="line">            indgr[v]--;</span><br><span class="line">            probab[v]+=(probab[u]+w)/(outdgr[v]);</span><br><span class="line">            <span class="keyword">if</span>(!indgr[v])&#123;</span><br><span class="line">                Q.push(v);</span><br><span class="line">            &#125;</span><br><span class="line">            iterW++;iterG++;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(indgr,<span class="number">0</span>,<span class="keyword">sizeof</span>(indgr));</span><br><span class="line">    <span class="built_in">memset</span>(outdgr,<span class="number">0</span>,<span class="keyword">sizeof</span>(outdgr));</span><br><span class="line">    <span class="built_in">memset</span>(probab,<span class="number">0</span>,<span class="keyword">sizeof</span>(probab));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">int</span> a,b,c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">        indgr[a]++;outdgr[a]++;</span><br><span class="line">        G[b].push_back(a);</span><br><span class="line">        W[b].push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    topsort();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2lf"</span>,probab[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里再附上另外的大佬这道题的链接，我是看了dyx大佬代码以后才发现自己累加的地方做错了的<s>对，没错，我最开始错了</s>,而 ZhuFN则是用的dfs做的。<br><a href="https://www.cnblogs.com/saitoasuka/p/10337553.html" target="_blank" rel="noopener">dyx</a><br><a href="http://buringstraw.win/index.php/archives/21/" target="_blank" rel="noopener">zfn</a><br>那么就可以了</p>
 
@@ -383,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/09/20190709/" rel="next" title="20190709 test">
-                <i class="fa fa-chevron-left"></i> 20190709 test
+              <a href="/2019/07/11/20190710test/" rel="next" title="20190710 test">
+                <i class="fa fa-chevron-left"></i> 20190710 test
               </a>
             
           </div>
@@ -472,7 +498,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -494,7 +520,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

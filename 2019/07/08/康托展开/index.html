@@ -45,6 +45,32 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -352,7 +378,7 @@
 <h2 id="逆推"><a href="#逆推" class="headerlink" title="逆推"></a><font color="darkmagenta"><strong>逆推</strong></font></h2><p>那么就是根据序号求结果了，方法是类似的<br>首先是把<code>1~n-1</code>的阶乘都算出来，然后呢每一位也是倒着回去，用序号整除这里对应的阶乘，然后看看在剩下的没有选的数字当中哪一个的比它小的数字的个数等于这一个结果就行了</p>
 <p>比较简洁，大概就是我对此的理解了</p>
 <h1 id="最后还有一个逆元的求法"><a href="#最后还有一个逆元的求法" class="headerlink" title="最后还有一个逆元的求法"></a>最后还有一个逆元的求法</h1><p>这个求法的推导自己去推，书上也是有的（数学一本通P17）<br>那么我就附上一份代码就行了</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inv</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> -(p/i)*inv(p%n,p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inv</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> -(p/i)*inv(p%n,p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>到此为止了。</p>
 
@@ -476,7 +502,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -498,7 +524,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
