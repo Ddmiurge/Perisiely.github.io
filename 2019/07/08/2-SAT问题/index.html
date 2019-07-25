@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="Elysia&#39;s Blog">
 <meta property="og:description" content="2-SAT问题的入门">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-11T09:02:29.468Z">
+<meta property="og:updated_time" content="2019-07-16T00:58:59.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2-SAT问题">
 <meta name="twitter:description" content="2-SAT问题的入门">
@@ -392,7 +392,7 @@
 </ul>
 <p>这里选择使用染色法</p>
 <h4 id="染色法"><a href="#染色法" class="headerlink" title="染色法"></a><font color="c62b26"><em>染色法</em></font></h4><p>从每一个组别开始去$dfs$,将要选择的点依次标记出来，并把其相关的必选点也同样染色，如果出现了冲突，则清除染色方案，重新染色。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//color是标记颜色的，other记录同一组中另外一个元素是多少</span></span><br><span class="line"><span class="comment">//stk是手动的栈，这里采用链式前向星存图</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(color[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	color[u]=<span class="literal">true</span>;</span><br><span class="line">	stk[++top]=u;<span class="comment">//记录 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="literal">false</span>,<span class="keyword">sizeof</span>(color));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(color[<span class="number">2</span>&lt;&lt;i<span class="number">-1</span>]||color[<span class="number">2</span>*i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="comment">//已经染过了色 </span></span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i<span class="number">-1</span>))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)color[stk[top]]=<span class="literal">false</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//color是标记颜色的，other记录同一组中另外一个元素是多少</span></span><br><span class="line"><span class="comment">//stk是手动的栈，这里采用链式前向星存图</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(color[u])<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[other[u]])<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	color[u]=<span class="literal">true</span>;</span><br><span class="line">	stk[++top]=u;<span class="comment">//记录 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">twoSAT</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(color,<span class="literal">false</span>,<span class="keyword">sizeof</span>(color));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(color[<span class="number">2</span>*i<span class="number">-1</span>]||color[<span class="number">2</span>*i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="comment">//已经染过了色 </span></span><br><span class="line">		top=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i<span class="number">-1</span>))&#123;</span><br><span class="line">			<span class="keyword">while</span>(top)color[stk[top]]=<span class="literal">false</span>,top--;</span><br><span class="line">			<span class="keyword">if</span>(!DFS(<span class="number">2</span>*i))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这里来说一下这一段代码</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">		<span class="keyword">if</span>(!DFS(to[i]))<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
@@ -443,14 +443,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/08/二分图/" rel="next" title="二分图匹配">
+                <i class="fa fa-chevron-left"></i> 二分图匹配
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/08/二分图/" rel="prev" title="二分图匹配">
-                二分图匹配 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/08/矩阵/" rel="prev" title="矩阵">
+                矩阵 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -528,7 +532,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -539,7 +543,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -550,7 +554,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
