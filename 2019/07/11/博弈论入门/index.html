@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="Elysia&#39;s Blog">
 <meta property="og:description" content="关于博弈论的一点基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-16T01:01:44.212Z">
+<meta property="og:updated_time" content="2019-10-14T10:19:32.029Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博弈论入门">
 <meta name="twitter:description" content="关于博弈论的一点基础知识">
@@ -344,6 +344,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/11/博弈论入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/11/博弈论入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -488,6 +498,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -535,7 +548,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -557,7 +570,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -825,6 +838,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'B2Ix5BbhzWGQOslTqiBAEzGR-gzGzoHsz',
+        appKey: 'UyaUnb5QIfMA5bN8PWh7nQ1V',
+        placeholder: 'Leave Your Comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

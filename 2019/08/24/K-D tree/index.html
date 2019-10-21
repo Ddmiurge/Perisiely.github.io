@@ -118,7 +118,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/26/qrBO5boU67dgtQ3.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/26/GPdv5LoZTejSV2E.png">
 <meta property="og:image" content="https://img-my.csdn.net/uploads/201212/04/1354625553_3651.jpg">
-<meta property="og:updated_time" content="2019-08-26T03:06:35.953Z">
+<meta property="og:updated_time" content="2019-08-28T07:24:36.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K-D tree入门">
 <meta name="twitter:description" content="如何维护高维的数据？来看看K-D tree">
@@ -350,6 +350,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/24/K-D tree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/24/K-D tree/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -381,7 +391,7 @@
         <h2 id="KNN问题"><a href="#KNN问题" class="headerlink" title="KNN问题"></a><font color="darkmagenta"><strong>KNN问题</strong></font></h2><p>​    K-Nearest Neighbor，我也不知道应该说是问题还是算法，也就不要管这个了。我们想象这样一个场景，在一个平面直角坐标系上面，有很多很多个点。现在我们随机地选择一个点，想要知道离他最近的$k$个点是哪些，怎么办。如果使用肉眼观察的话，那么我们是可以大致判断出来有哪些的。可是在很多时候，我们拿到的并不是图像，而是数据，而这些数据要让计算机来处理，怎么办？？</p>
 <p>​    对于这一个问题，我们可以用时间复杂度为$\Theta(n^2)$的方法，处理出所有的距离，询问到处理的距离里面来看，但是我们还可以有别的方法。</p>
 <h2 id="K-D-tree"><a href="#K-D-tree" class="headerlink" title="K-D tree"></a><font color="darkmagenta"><strong>K-D tree</strong></font></h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a><font color="1453ad"><strong>概念</strong></font></h3><p>​    K-D tree 是一棵<strong>二叉查找树</strong>,它可以用来维护有多维信息的数据。因为在做题的时候，遇到的一般都是$2$维,所以说下面的例子我就以二维的来看了</p>
-<h3 id="建立"><a href="#建立" class="headerlink" title="建立"></a><font color="1453ad"><strong>建立</strong></font></h3><h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a><font color="green">解释</font></h4><p>​    平常的二叉查找树，建立的时候，在每一个中间，会比较值的大小，比他小的就到他的左儿子那边，比他打的就到他的右儿子那边。但是K-D tree 有多维信息，这种情况下应该怎么办？既然他是有K维的信息，那么我们就任意选择其中以为来进行分割就可以了。这就好像是在平面中画了一条线一样，将它们分成了两个部分<br>​    比如下面的这一个，这是一个这个平面上有很多点，我们先选取其中一维进行分割，分成了两块，然后我们换一维继续分割<br><img src="https://i.loli.net/2019/08/24/sHecKXAoxui5qVC.png" alt="k1.png"><br><img src="https://i.loli.net/2019/08/24/mBPb2FaWUGCwK5r.png" alt="k2.png"></p>
+<h3 id="建立"><a href="#建立" class="headerlink" title="建立"></a><font color="1453ad"><strong>建立</strong></font></h3><h4 id="解释"><a href="#解释" class="headerlink" title="解释"></a><font color="green">解释</font></h4><p>​    平常的二叉查找树，建立的时候，在每一个中间节点，会比较值的大小，比他小的就到他的左儿子那边，比他大的就到他的右儿子那边。但是K-D tree 有多维信息，这种情况下应该怎么办？既然他是有K维的信息，那么我们就任意选择其中以为来进行分割就可以了。这就好像是在平面中画了一条线一样，将它们分成了两个部分<br>​    比如下面的这一个，这是一个这个平面上有很多点，我们先选取其中一维进行分割，分成了两块，然后我们换一维继续分割<br><img src="https://i.loli.net/2019/08/24/sHecKXAoxui5qVC.png" alt="k1.png"><br><img src="https://i.loli.net/2019/08/24/mBPb2FaWUGCwK5r.png" alt="k2.png"></p>
 <p>​    就这个样子交替分割下去就可以了，听着是不是就像切蛋糕一样？</p>
 <p>​    那么怎么来进行分割呢，有下面两种方法：</p>
 <ul>
@@ -426,7 +436,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> now,node p,<span class="keyword">int</span> deps)</span></span>&#123;</span><br><span class="line">	<span class="comment">//插入操作，常规 </span></span><br><span class="line">	keyd=deps%maxk;</span><br><span class="line">	<span class="keyword">if</span>(p.databank[keyd]&lt;=D(now,keyd))&#123;</span><br><span class="line">		<span class="keyword">if</span>(lc[now]==<span class="number">0</span>)&#123;</span><br><span class="line">			lc[now]=++tot;</span><br><span class="line">			d[tot]=p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> insert(lc[now],p,deps+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(rc[now]==<span class="number">0</span>)&#123;</span><br><span class="line">		rc[now]=++tot;</span><br><span class="line">		d[tot]=p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> insert(rc[now],p,deps+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	pushup(now);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>差不多，就这样吧……</p>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a><font color="green">删除</font></h4><p>可以选择直接打标记，当然也有别的方法，可以看看我在最后附上的文章</p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a><font color="green">删除</font></h4><p>K-D tree的删除操作，对于没有后继节点的节点，那么就直接删除了就好，但是如果说有后继节点的话，你就从它的左子树中，找出这一维最小的那一个值，或者是右子树中找出最大的那一个值，然后再把把那一个值从原来的树中删除了……这是一个递归实现的过程。</p>
 <h4 id="重构"><a href="#重构" class="headerlink" title="重构"></a><font color="green">重构</font></h4><p>当插入删除操作进行了一定次数以后，重新用一次$build$就好了。当然也可以类似替罪羊树那样，选择一个规定的$\alpha$，如果说不符合要求再使用一次$build$,不过我觉得还是一种方法更好</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://oi-wiki.org/ds/kdt/" target="_blank" rel="noopener">oi-wiki</a></p>
 <p><a href="https://blog.csdn.net/likika2012/article/details/39619687" target="_blank" rel="noopener">KD树（网易游戏笔试）</a></p>
@@ -474,6 +484,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/10/07/20191007 test/" rel="prev" title="国庆最后一天的contest">
+                国庆最后一天的contest <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -501,6 +515,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -549,7 +566,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -571,7 +588,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -839,6 +856,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'B2Ix5BbhzWGQOslTqiBAEzGR-gzGzoHsz',
+        appKey: 'UyaUnb5QIfMA5bN8PWh7nQ1V',
+        placeholder: 'Leave Your Comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

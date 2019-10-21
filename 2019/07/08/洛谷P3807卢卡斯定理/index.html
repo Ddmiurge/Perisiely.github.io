@@ -113,12 +113,10 @@
 <meta property="og:site_name" content="Elysia&#39;s Blog">
 <meta property="og:description" content="Lucas的模板">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
-<meta property="og:updated_time" content="2019-07-11T09:02:48.403Z">
+<meta property="og:updated_time" content="2019-10-13T07:08:56.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷P3807卢卡斯定理">
 <meta name="twitter:description" content="Lucas的模板">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
 
 
 
@@ -346,6 +344,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/08/洛谷P3807卢卡斯定理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/08/洛谷P3807卢卡斯定理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -375,13 +383,11 @@
 
       
         <p>这是一道模板题</p>
-<h2 id="这里是题目-洛谷P3807"><a href="#这里是题目-洛谷P3807" class="headerlink" title="这里是题目 洛谷P3807"></a><strong>这里是题目 <a href="https://www.luogu.org/problemnew/show/P3807" target="_blank" rel="noopener">洛谷P3807</a></strong></h2><h2 id="卢卡斯定理及题目的阐释"><a href="#卢卡斯定理及题目的阐释" class="headerlink" title="卢卡斯定理及题目的阐释"></a><font color="darkMagenta"><strong>卢卡斯定理及题目的阐释</strong></font></h2><p>卢卡斯定理是用来解决一大很大的组合数来和一个质数求余的问题，它的定义如下<br>如果p为素数，设n=sp+q,m=tp+r<br>则：</p>
-<img src="https://i.loli.net/2019/01/13/5c3aed8b7a742.jpg">
-
+<h2 id="这里是题目-洛谷P3807"><a href="#这里是题目-洛谷P3807" class="headerlink" title="这里是题目 洛谷P3807"></a><strong>这里是题目 <a href="https://www.luogu.org/problemnew/show/P3807" target="_blank" rel="noopener">洛谷P3807</a></strong></h2><h2 id="卢卡斯定理及题目的阐释"><a href="#卢卡斯定理及题目的阐释" class="headerlink" title="卢卡斯定理及题目的阐释"></a><font color="darkMagenta"><strong>卢卡斯定理及题目的阐释</strong></font></h2><p>卢卡斯定理是用来解决一大很大的组合数来和一个质数求余的问题，它的定义如下<br>如果$p$为素数，设$n=sp+q$,$m=tp+r$<br>则:<br>$$<br>C^{sp+q}_{tp+r}\equiv C^s_t*C^q_r(mod\ p)<br>$$</p>
 <p>那么来看看题。<br>首先看这个数据范围，就知道可以用<s>int的类型解决个屁，就是int害的我错了好多次</s>long long 的数据类型解决，这个数据看起来好像是只有 10的5次方,但是中间这么多的计算，突然的就给我溢出了<s>我靠着ZFN大佬的数据测试发现负数才发现的</s>。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;m)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(n==m)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(m&gt;n-m)m=n-m;<span class="comment">//约掉 </span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> s1=<span class="number">1</span>,s2=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">		s1=s1*(n-i)%p;</span><br><span class="line">		s2=s2*(i+<span class="number">1</span>)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s1*qkpow(s2,p<span class="number">-2</span>,p)%p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这一段是求组合的函数，拿出来单独讲一讲<br>因为这里面的参数传过来的时候都是已经和p求过余了的，而且p在题目中说了的，是一个质数所以说这里的n,m都是和p互质的。<br>因为公式里面要除掉$m!$，同时有要去对p取模，所以考虑用它的逆元乘来代替用它来除<br>而根据费马小定理可以知道它的逆元是它的$p-2$方</p>
+<p>​    这一段是求组合的函数，拿出来单独讲一讲<br>​    因为这里面的参数传过来的时候都是已经和p求过余了的，而且p在题目中说了的，是一个质数所以说这里的$n$,$m$都是和$p$互质的。<br>​    因为公式里面要除掉$m!$，同时有要去对p取模，所以考虑用它的逆元乘来代替用它来除<br>而根据费马小定理可以知道它的逆元是它的$p-2$方</p>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a><font color="darkmagenta"><strong>Code</strong></font></h2><p>那么综上，加上以个快速幂就可以解出这道题了</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//洛谷P3807 Lucas 模板题 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,p;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">qkpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> b,<span class="keyword">int</span> p,<span class="keyword">int</span> mod)</span></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> res=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			(res*=b)%=mod;</span><br><span class="line">		&#125;</span><br><span class="line">		(b*=b)%=mod;</span><br><span class="line">		p&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;m)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(n==m)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(m&gt;n-m)m=n-m;<span class="comment">//约掉 </span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> s1=<span class="number">1</span>,s2=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">		s1=s1*(n-i)%p;</span><br><span class="line">		s2=s2*(i+<span class="number">1</span>)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s1*qkpow(s2,p<span class="number">-2</span>,p)%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Lucas</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> C(n%p,m%p,p)*Lucas(n/p,m/p,p)%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">	freopen(<span class="string">"input.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"output.txt"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;m,&amp;p);</span><br><span class="line">		n+=m;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;Lucas(n,m,p)&lt;&lt;<span class="string">"\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -459,6 +465,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -506,7 +515,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -796,6 +805,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'B2Ix5BbhzWGQOslTqiBAEzGR-gzGzoHsz',
+        appKey: 'UyaUnb5QIfMA5bN8PWh7nQ1V',
+        placeholder: 'Leave Your Comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

@@ -94,7 +94,7 @@
 
 
 
-  <meta name="keywords" content="Catalan Number,同余,扩展欧几里得,矩阵,乘法逆元,高斯消元,">
+  <meta name="keywords" content="Catalan Number,同余,矩阵,扩展欧几里得,乘法逆元,高斯消元,">
 
 
 
@@ -106,14 +106,14 @@
 
 
 <meta name="description" content="明天考试靠数论，我好慌啊，现在记录一下数论的板子，临时抱佛脚">
-<meta name="keywords" content="Catalan Number,同余,扩展欧几里得,矩阵,乘法逆元,高斯消元">
+<meta name="keywords" content="Catalan Number,同余,矩阵,扩展欧几里得,乘法逆元,高斯消元">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数论的板子">
 <meta property="og:url" content="http://yoursite.com/2019/07/25/数论的一些板子/index.html">
 <meta property="og:site_name" content="Elysia&#39;s Blog">
 <meta property="og:description" content="明天考试靠数论，我好慌啊，现在记录一下数论的板子，临时抱佛脚">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-26T01:10:17.928Z">
+<meta property="og:updated_time" content="2019-10-13T07:34:07.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论的板子">
 <meta name="twitter:description" content="明天考试靠数论，我好慌啊，现在记录一下数论的板子，临时抱佛脚">
@@ -344,6 +344,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/25/数论的一些板子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/25/数论的一些板子/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -372,17 +382,27 @@
       
 
       
-        <h2 id="辗转相除法"><a href="#辗转相除法" class="headerlink" title="辗转相除法"></a><font color="darkmagenta">辗转相除法</font></h2><h3 id="原始版本"><a href="#原始版本" class="headerlink" title="原始版本"></a><font color="1453ad">原始版本</font></h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gcd(x,y) (y==0)?x:gcd(y,x%y)</span></span><br></pre></td></tr></table></figure>
+        <h2 id="辗转相除法"><a href="#辗转相除法" class="headerlink" title="辗转相除法"></a><font color="darkmagenta">辗转相除法</font></h2><h3 id="原始版本"><a href="#原始版本" class="headerlink" title="原始版本"></a><font color="1453ad">原始版本</font></h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(x,y)</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (y==<span class="number">0</span>)?x:gcd(y,x%y);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="高级版本"><a href="#高级版本" class="headerlink" title="高级版本"></a><font color="1453ad">高级版本</font></h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">if</span>(!x)<span class="keyword">return</span> y;<span class="keyword">if</span>(!y)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;!(x&amp;<span class="number">1</span>);i++)x&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">0</span>;!(j&amp;<span class="number">1</span>);j++)j&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;y)&#123;x^=y;y^=x;x^=y;&#125;</span><br><span class="line">        <span class="keyword">if</span>(!(x-=y))<span class="keyword">return</span> y&lt;&lt;i;<span class="comment">//这里也可以减法改成模</span></span><br><span class="line">        <span class="keyword">while</span>(!(x&amp;<span class="number">1</span>))x&gt;&gt;=<span class="number">1</span>;<span class="comment">//消除所有的2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="扩展欧几里得"><a href="#扩展欧几里得" class="headerlink" title="扩展欧几里得"></a><font color="darkmagenta">扩展欧几里得</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b)&#123;x=<span class="number">1</span>;y=<span class="number">0</span>;<span class="keyword">return</span> a;&#125;</span><br><span class="line">    <span class="keyword">int</span> gcd=exgcd(b,a%b,x,y);</span><br><span class="line">    <span class="keyword">int</span> t=x;x=y;y=t-b/a*y;</span><br><span class="line">    <span class="keyword">return</span> gcd;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a><font color="darkmagenta">逆元</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inv</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="comment">//这里面求的是n在mod p情况下的逆元</span></span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> -(p/i)*inv(p%n,p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a><font color="darkmagenta">逆元</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">inv</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">    <span class="comment">//这里面求的是n在mod p情况下的逆元</span></span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> -(p/n)*inv(p%n,p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="欧拉筛"><a href="#欧拉筛" class="headerlink" title="欧拉筛"></a><font color="darkmagenta">欧拉筛</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> prm[maxn],cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">bool</span> isp[maxn]=&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;<span class="comment">//记录哪一些数不是质数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eular_Sieve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxn;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isp[i])prm[++cnt]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt <span class="keyword">and</span> i*prm[j]&lt;maxn;j++)&#123;</span><br><span class="line">            isp[i*prm[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(!(i%prm[j]))<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a><font color="darkmagenta">欧拉函数</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> prm[maxn],phi[maxn],cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">bool</span> isp[maxn]=&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;<span class="comment">//记录哪一些数不是质数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eular_Sieve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxn;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isp[i])prm[++cnt]=i,phi[i]=i<span class="number">-1</span>;<span class="comment">//质数的phi值等于他自己减去1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt <span class="keyword">and</span> i*prm[j]&lt;maxn;j++)&#123;</span><br><span class="line">            isp[i*prm[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(!(i%prm[j]))&#123;</span><br><span class="line">				phi[i*p[j]]=phi[i]*prm[j]</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;      </span><br><span class="line">            <span class="keyword">else</span> phi[i*p[j]]=phi[i]*(prm[j]<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a><font color="darkmagenta">欧拉函数</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> prm[maxn],phi[maxn],cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">bool</span> isp[maxn]=&#123;<span class="number">1</span>,<span class="number">1</span>&#125;;<span class="comment">//记录哪一些数不是质数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Eular_Sieve</span><span class="params">()</span></span>&#123;</span><br><span class="line">    phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;maxn;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isp[i])prm[++cnt]=i,phi[i]=i<span class="number">-1</span>;<span class="comment">//质数的phi值等于他自己减去1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;cnt <span class="keyword">and</span> i*prm[j]&lt;maxn;j++)&#123;</span><br><span class="line">            isp[i*prm[j]]=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(!(i%prm[j]))&#123;</span><br><span class="line">			   phi[i*p[j]]=phi[i]*prm[j]</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;      </span><br><span class="line">            <span class="keyword">else</span> phi[i*p[j]]=phi[i]*(prm[j]<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lucas"><a href="#Lucas" class="headerlink" title="Lucas"></a><font color="darkmagenta">Lucas</font></h2><p>非递归形式</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Lucas</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">1</span>,a,b;</span><br><span class="line">    <span class="keyword">while</span>(n&amp;&amp;m)&#123;</span><br><span class="line">    	<span class="keyword">int</span> a=n%p,b=b%p;</span><br><span class="line">        <span class="keyword">if</span>(a&lt;b)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        (res*=C(a,b,p))%=p;</span><br><span class="line">        n/=p;m/=p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>递归形式</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">qkpow</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> b,<span class="keyword">int</span> p,<span class="keyword">int</span> mod)</span></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> res=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(p)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p&amp;<span class="number">1</span>)&#123;</span><br><span class="line">			(res*=b)%=mod;</span><br><span class="line">		&#125;</span><br><span class="line">		(b*=b)%=mod;</span><br><span class="line">		p&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;m)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(n==m)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(m&gt;n-m)m=n-m;<span class="comment">//约掉 </span></span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> s1=<span class="number">1</span>,s2=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">		s1=s1*(n-i)%p;</span><br><span class="line">		s2=s2*(i+<span class="number">1</span>)%p;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s1*qkpow(s2,p<span class="number">-2</span>,p)%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Lucas</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> C(n%p,m%p,p)*Lucas(n/p,m/p,p)%p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Catalan-Number"><a href="#Catalan-Number" class="headerlink" title="Catalan Number"></a><font color="darkmagenta">Catalan Number</font></h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">f[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;j++)&#123;</span><br><span class="line">        f[i]=f[j]*f[i<span class="number">-1</span>-j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">f[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">	f[i]=((<span class="number">4</span>*i<span class="number">-2</span>)*f[i<span class="number">-1</span>])/(i+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -405,9 +425,9 @@
           
             <a href="/tags/同余/" rel="tag"># 同余</a>
           
-            <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
-          
             <a href="/tags/矩阵/" rel="tag"># 矩阵</a>
+          
+            <a href="/tags/扩展欧几里得/" rel="tag"># 扩展欧几里得</a>
           
             <a href="/tags/乘法逆元/" rel="tag"># 乘法逆元</a>
           
@@ -466,6 +486,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -513,7 +536,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +558,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -602,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#辗转相除法"><span class="nav-number">1.</span> <span class="nav-text">辗转相除法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始版本"><span class="nav-number">1.1.</span> <span class="nav-text">原始版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级版本"><span class="nav-number">1.2.</span> <span class="nav-text">高级版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展欧几里得"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆元"><span class="nav-number">3.</span> <span class="nav-text">逆元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉筛"><span class="nav-number">4.</span> <span class="nav-text">欧拉筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉函数"><span class="nav-number">5.</span> <span class="nav-text">欧拉函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#辗转相除法"><span class="nav-number">1.</span> <span class="nav-text">辗转相除法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始版本"><span class="nav-number">1.1.</span> <span class="nav-text">原始版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级版本"><span class="nav-number">1.2.</span> <span class="nav-text">高级版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展欧几里得"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆元"><span class="nav-number">3.</span> <span class="nav-text">逆元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉筛"><span class="nav-number">4.</span> <span class="nav-text">欧拉筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉函数"><span class="nav-number">5.</span> <span class="nav-text">欧拉函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lucas"><span class="nav-number">6.</span> <span class="nav-text">Lucas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catalan-Number"><span class="nav-number">7.</span> <span class="nav-text">Catalan Number</span></a></li></ol></div>
             
 
           </div>
@@ -803,6 +826,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'B2Ix5BbhzWGQOslTqiBAEzGR-gzGzoHsz',
+        appKey: 'UyaUnb5QIfMA5bN8PWh7nQ1V',
+        placeholder: 'Leave Your Comments',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
